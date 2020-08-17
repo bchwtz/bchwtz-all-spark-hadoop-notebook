@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     tmux \
     vim
 
-ADD setup_hadoop.sh /
+ADD ./script/setup_hadoop.sh /
 RUN chmod +x /setup_hadoop.sh
 RUN /setup_hadoop.sh
 
