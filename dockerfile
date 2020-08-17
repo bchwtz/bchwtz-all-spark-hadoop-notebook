@@ -3,6 +3,8 @@
 
 FROM jupyter/all-spark-notebook:13b866ff67b9
 
+USER root
+
 #COPY . /app
 #RUN make /app
 #CMD python /app/app.py
