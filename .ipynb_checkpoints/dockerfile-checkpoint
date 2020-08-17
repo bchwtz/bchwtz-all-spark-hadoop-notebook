@@ -3,10 +3,6 @@
 
 FROM jupyter/all-spark-notebook:13b866ff67b9
 
-USER jovyan
-
-
-
 USER root
 
 RUN apt-get update && apt-get install -y \
@@ -16,11 +12,6 @@ RUN apt-get update && apt-get install -y \
     tmux \
     vim
 
-RUN wget ftp://ftp.fau.de/apache/hadoop/common/hadoop-3.3.0/hadoop-3.3.0.tar.gz \
-	&& tar -xzf hadoop-3.3.0.tar.gz -C /opt/hadoop-3.3.0 
-	&& mv hadoop-3.3.0 /opt/hadoop-3.3.0
-	&& rm hadoop-3.3.0.tar.gz
-	
 ADD ./script/setup_hadoop.sh /
 RUN chmod +x /setup_hadoop.sh
 RUN /setup_hadoop.sh
@@ -38,3 +29,9 @@ RUN /setup_userprofile.sh
 
 
 EXPOSE 8888 4040 9870 8088
+
+
+
+#COPY . /app
+#RUN make /app
+#CMD python /app/app.py
