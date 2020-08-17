@@ -43,16 +43,14 @@ RUN echo -e "\nexport PDSH_RCMD_TYPE=ssh" >> ~/.bashrc \
 	&& echo 'export YARN_HOME=${HADOOP_HOME}' >> ~/.bashrc \
 	&& echo 'export JAVA_HOME=$(dirname $(dirname $(update-alternatives --list java)))' >> /opt/hadoop-3.3.0/etc/hadoop/hadoop-env.sh
 
-
-USER root
-RUN /etc/init.d/ssh start \
-	&& /opt/hadoop-3.3.0/bin/hdfs namenode -format \
+#USER root
+#RUN /etc/init.d/ssh start \
+#	&& /opt/hadoop-3.3.0/bin/hdfs namenode -format 
 	
 #USER root
 
 #RUN /etc/init.d/ssh start \
 #	&& /opt/hadoop-3.3.0/bin/hdfs namenode -format \
 #    && chown -R jovyan:users /opt/hadoop-3.3.0
->>>>>>> External Changes
 	
 EXPOSE 8888 4040 9870 8088
