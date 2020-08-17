@@ -15,5 +15,9 @@ RUN apt-get update && apt-get install -y \
     htop \
     tmux \
     vim
-	
+
+ADD setup_hadoop.sh /
+RUN chmod +x /setup_hadoop.sh
+RUN /setup_hadoop.sh
+
 EXPOSE 8888 4040 9870 8088
