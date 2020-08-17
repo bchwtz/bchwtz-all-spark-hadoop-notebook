@@ -7,7 +7,7 @@ FROM jupyter/all-spark-notebook:13b866ff67b9
 #RUN make /app
 #CMD python /app/app.py
 
-RUN sudo apt-get update && sudo apt-get install -y \
+RUN apt-get update && apt-get install -y \
     ssh \
     pdsh \
     htop \
