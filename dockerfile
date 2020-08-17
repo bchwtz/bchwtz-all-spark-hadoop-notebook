@@ -18,7 +18,6 @@ RUN apt-get update && apt-get install -y \
 
 RUN wget ftp://ftp.fau.de/apache/hadoop/common/hadoop-3.3.0/hadoop-3.3.0.tar.gz \
 	&& tar -xzf hadoop-3.3.0.tar.gz -C /opt \
-	&& mv hadoop-3.3.0 /opt/hadoop-3.3.0 \
 	&& rm hadoop-3.3.0.tar.gz
 	
 ADD ./script/setup_hadoop.sh /
