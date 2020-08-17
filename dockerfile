@@ -25,9 +25,6 @@ COPY ./config/hadoop/hdfs-site.xml /opt/hadoop-3.3.0/etc/hadoop/
 COPY ./config/hadoop/mapred-site.xml /opt/hadoop-3.3.0/etc/hadoop/
 COPY ./config/hadoop/yarn-site.xml /opt/hadoop-3.3.0/etc/hadoop/
 
-COPY ./script/setup_userprofile.sh /
-RUN chmod +x /setup_userprofile.sh
-
 USER jovyan
 
 RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa \
