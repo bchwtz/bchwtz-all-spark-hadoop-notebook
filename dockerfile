@@ -16,16 +16,17 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean
 
 RUN wget ftp://ftp.fau.de/apache/hadoop/common/hadoop-3.3.0/hadoop-3.3.0.tar.gz \
-	&& tar -xzf hadoop-3.3.0.tar.gz -C /opt \
+	&& tar -xzf hadoop-3.3.0.tar.gz \
+    && mv hadoop-3.3.0 /opt/
 	&& rm hadoop-3.3.0.tar.gz \
 	&& chown -R jovyan:users /opt/hadoop-3.3.0
-	
+
+USER jovyan
+
 COPY ./config/hadoop/core-site.xml /opt/hadoop-3.3.0/etc/hadoop/
 COPY ./config/hadoop/hdfs-site.xml /opt/hadoop-3.3.0/etc/hadoop/
 COPY ./config/hadoop/mapred-site.xml /opt/hadoop-3.3.0/etc/hadoop/
 COPY ./config/hadoop/yarn-site.xml /opt/hadoop-3.3.0/etc/hadoop/
-
-USER jovyan
 
 RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa \
 	&& cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys \
@@ -42,8 +43,10 @@ RUN echo -e "\nexport PDSH_RCMD_TYPE=ssh" >> ~/.bashrc \
 	&& echo 'export YARN_HOME=${HADOOP_HOME}' >> ~/.bashrc \
 	&& echo 'export JAVA_HOME=$(dirname $(dirname $(update-alternatives --list java)))' >> /opt/hadoop-3.3.0/etc/hadoop/hadoop-env.sh
 
-USER root
-RUN /etc/init.d/ssh start \
-	&& /opt/hadoop-3.3.0/bin/hdfs namenode -format
+#USER root
+
+#RUN /etc/init.d/ssh start \
+#	&& /opt/hadoop-3.3.0/bin/hdfs namenode -format \
+#    && chown -R jovyan:users /opt/hadoop-3.3.0
 	
 EXPOSE 8888 4040 9870 8088
