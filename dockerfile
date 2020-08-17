@@ -1,9 +1,8 @@
 # Docker Data Engineering Image
 # Maintainer: bchwtz
 
-LABEL maintainer="bchwtz"
-
 FROM jupyter/all-spark-notebook:13b866ff67b9
+LABEL maintainer="bchwtz"
 
 USER root
 
